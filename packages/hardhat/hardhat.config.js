@@ -39,7 +39,7 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true,
       accounts: {
-        mnemonic: "yellow face wide donor iron dynamic treat guess van shove second annual"
+        mnemonic: "ADD Memo"
       },
     },
     rinkeby: {
