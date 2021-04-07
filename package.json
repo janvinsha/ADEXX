@@ -1,0 +1,63 @@
+{
+  "name": "@demo-proj/adexproj",
+  "version": "1.0.0",
+  "keywords": [
+    "ethereum",
+    "react",
+    "uniswap",
+    "workspaces",
+    "yarn"
+  ],
+  "private": true,
+  "scripts": {
+    "react-app:build": "yarn workspace @demo-proj/react-app build --max-old-space-size=12288",
+    "react-app:eject": "yarn workspace @demo-proj/react-app eject",
+    "react-app:start": "yarn workspace @demo-proj/react-app start",
+    "react-app:test": "yarn workspace @demo-proj/react-app test",
+    "build": "yarn workspace @demo-proj/react-app build --max-old-space-size=12288",
+    "chain": "yarn workspace @demo-proj/hardhat chain",
+    "fork": "yarn workspace @demo-proj/hardhat fork",
+    "node": "yarn workspace @demo-proj/hardhat chain",
+    "test": "yarn workspace @demo-proj/hardhat test",
+    "start": "yarn workspace @demo-proj/react-app start",
+    "compile": "yarn workspace @demo-proj/hardhat compile",
+    "deploy": "yarn workspace @demo-proj/hardhat deploy",
+    "watch": "yarn workspace @demo-proj/hardhat watch",
+    "accounts": "yarn workspace @demo-proj/hardhat accounts",
+    "balance": "yarn workspace @demo-proj/hardhat balance",
+    "send": "yarn workspace @demo-proj/hardhat send",
+    "ipfs": "yarn workspace @demo-proj/react-app ipfs",
+    "surge": "yarn workspace @demo-proj/react-app surge",
+    "s3": "yarn workspace @demo-proj/react-app s3",
+    "ship": "yarn workspace @demo-proj/react-app ship",
+    "generate": "yarn workspace @demo-proj/hardhat generate",
+    "account": "yarn workspace @demo-proj/hardhat account",
+    "mineContractAddress": "cd packages/hardhat && npx hardhat mineContractAddress",
+    "wallet": "cd packages/hardhat && npx hardhat wallet",
+    "fundedwallet": "cd packages/hardhat && npx hardhat fundedwallet",
+    "flatten": "cd packages/hardhat && npx hardhat flatten",
+    "graph-run-node": "cd docker/graph-node && docker-compose up",
+    "graph-remove-node": "cd docker/graph-node && docker-compose down",
+    "graph-prepare": "mustache packages/subgraph/config/config.json packages/subgraph/src/subgraph.template.yaml > packages/subgraph/subgraph.yaml",
+    "graph-codegen": "yarn workspace @demo-proj/subgraph graph codegen",
+    "graph-build": "yarn workspace @demo-proj/subgraph graph build",
+    "graph-create-local": "yarn workspace @demo-proj/subgraph graph create --node http://localhost:8020/ demo-proj/your-contract",
+    "graph-remove-local": "yarn workspace @demo-proj/subgraph graph remove --node http://localhost:8020/ demo-proj/your-contract",
+    "graph-deploy-local": "yarn workspace @demo-proj/subgraph graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 demo-proj/your-contract",
+    "graph-ship-local": "yarn graph-prepare && yarn graph-codegen && yarn graph-deploy-local",
+    "deploy-and-graph": "yarn deploy && yarn graph-ship-local",
+    "theme": "yarn workspace @demo-proj/react-app theme",
+    "watch-theme": "yarn workspace @demo-proj/react-app watch"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@graphprotocol/graph-ts",
+      "**/@graphprotocol/graph-ts/**",
+      "**/hardhat",
+      "**/hardhat/**"
+    ]
+  }
+}
