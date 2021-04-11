@@ -9,18 +9,15 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 import { useExchangePrice, useGasPrice, useUserProvider, useContractLoader, useContractReader, useEventListener, useBalance, useExternalContractLoader } from "./hooks";
 import Header from "./components/Header";
-import TokenBalance from "./components/TokenBalance";
-import Faucet from "./components/Faucet";
-import Ramp from "./components/Ramp";
-import Contract from "./components/Contract/Contract";
-import GasGauge from "./components/GasGauge";
 import GlobalStyles from "./components/GlobalStyles";
 import Home from "./views/Home";
+import Staking from "./views/Staking"
 import { Transactor } from "./helpers";
 import { formatEther, parseEther } from "@ethersproject/units";
 //import Hints from "./Hints";
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 import ADEX from "./ADEX";
+import Contract from "./components/Contract/Contract";
 ////
 
 /// 📡 What chain are your contracts deployed to?
@@ -195,7 +192,24 @@ isDark={isDark}
   
           </Route>
           <Route path="/staking">
-          <ADEX
+            <Staking
+           address={address}
+            userProvider={userProvider}
+            mainnetProvider={mainnetProvider}
+            localProvider={localProvider}
+            yourLocalBalance={yourLocalBalance}
+            price={price}
+            tx={tx}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            purpose={purpose}
+            setPurposeEvents={setPurposeEvents}
+            name="AfricaToken"
+            signer={userProvider.getSigner()}
+            provider={localProvider}
+            blockExplorer={blockExplorer}         
+            />
+          {/* <ADEX
               address={address}
               userProvider={userProvider}
               mainnetProvider={mainnetProvider}
@@ -216,7 +230,18 @@ isDark={isDark}
               mainnetProvider={mainnetProvider}
               address={address}
               blockExplorer={blockExplorer}
-            /> 
+            />  */}
+          </Route>
+          <Route  exact path="/contract">
+          <Contract
+            name="AfricaToken"
+            signer={userProvider.getSigner()}
+            provider={localProvider}
+            mainnetProvider={mainnetProvider}
+            address={address}
+            blockExplorer={blockExplorer}      
+            readContracts={readContracts}
+          />
           </Route>
         </Switch>
 

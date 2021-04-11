@@ -86,6 +86,8 @@ setMore(false)
         </span>
         <Link  to="/" className={pathname==="/"?"active":""}>Swap</Link>
         <Link to="/staking" className={pathname==="/staking"?"active":""}>Staking</Link>
+        <Link to="/contract" className={pathname==="/contract"?"active":""}>Contract</Link>
+        <Link to="/xend" className={pathname==="/xend"?"active":""}>Xend</Link>
             </div>
      
   <div className="right">
@@ -148,10 +150,11 @@ setMore(false)
         </span>
         <Link  to="/" className={pathname==="/"?"active":""}>Swap</Link>
         <Link to="/staking" className={pathname==="/staking"?"active":""}>Staking</Link>
+        <Link to="/contract" className={pathname==="/contract"?"active":""}>Contract</Link>
+        <Link to="/xend" className={pathname==="/xend"?"active":""}>Xend</Link>
             </div>
      
   <div className="right">
-  <span className="networkDisplay">{networkDisplay}</span>
 
   </div>
   <div className="down">
@@ -178,7 +181,7 @@ setMore(false)
     </span>}
     </span>
  <span className="downRight">
-
+ <span className="networkDisplay">{networkDisplay}</span>
  <span className="darkMode">
    { isDarkMode?
 <button onClick={handlerThemeSwitch} className="moon">
@@ -334,15 +337,25 @@ display:none;
     justify-content:space-between;
     align-items:center;
     background:${({isDarkMode})=>isDarkMode?"#020c1f":"white"};
+    z-index:10;
     .downRight{
       display:flex;
     flex-flow: row wrap;
     align-items:center;
+ 
     }.downLeft{
       display:flex;
     flex-flow: row wrap;
     align-items:center;
     }
+    .networkDisplay{
+      color:${({isDarkMode})=>isDarkMode?"gold":"#9ea83c"};
+ background:${({isDarkMode})=>isDarkMode?"#2c3961":"#f3f3f3"};
+ border-radius:5px;
+ margin-right:0.8rem;
+    font-size:1.4rem;
+    padding:0.3rem 0.7rem;
+      }
     .display{
         padding:0rem 0.6rem;
         color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
@@ -412,6 +425,8 @@ display:none;
       display:flex;
       flex-flow: row wrap;
       align-items: center;
+      padding:1.3rem 0.8rem;
+
       a{
         font-size:1.4rem;
         font-weight:500;
@@ -433,13 +448,7 @@ display:none;
       display:flex;
       flex-flow:row wrap;
       align-items: center;
-      .networkDisplay{
- color:${({isDarkMode})=>isDarkMode?"gold":"#9ea83c"};
- font-size:1.3rem;
- padding:0.2rem 0.5rem;
- background:${({isDarkMode})=>isDarkMode?"#33426e":"#f3f3f3"};
- border-radius:5px;
-      }
+
  }}
  
 `;

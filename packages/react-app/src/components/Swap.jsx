@@ -411,7 +411,9 @@ const handleReverse=()=>{
     <StyledSwap  isDarkMode={isDarkMode} settingsVisible={settingsVisible}>
       <div className="swap">
       <span className="settings"  ref={container}>
-    <div className="title"><span>Swap</span> <button type="text" onClick={handlerSettingsVisible}> <FontAwesomeIcon icon={faCog} color={isDarkMode?"whitesmoke":"gray"}/></button></div>
+    <div className="title">
+      <span>Swap</span> <button type="text" onClick={handlerSettingsVisible}>
+         <FontAwesomeIcon icon={faCog} color={isDarkMode?"whitesmoke":"gray"}/></button></div>
       <div className="hover-down">
       <div className="col">
       <span >blockNumber: {blockNumber}</span>
@@ -604,7 +606,7 @@ overflow:hidden;
 .swap{
 background:${({isDarkMode})=>isDarkMode?"#020c1f":"white"};
 width:30rem;
-height:30rem;
+min-height:25rem;
 border-radius:20px;
 margin-top:2.5rem;
 margin-left:auto;
@@ -614,7 +616,7 @@ flex-flow:column wrap;
 color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
 @media screen and (max-width: 900px) {
 width:90%;
-height:40rem;
+min-height:34rem;
 margin-left:auto;
 margin-right:auto;
 overflow:hidden;

@@ -39,7 +39,7 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true,
       accounts: {
-        mnemonic: "ADD Memo"
+        mnemonic: "hair essence just embrace life arrow excuse alpha fox aunt please curtain"
       },
     },
     rinkeby: {

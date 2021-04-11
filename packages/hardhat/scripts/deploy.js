@@ -9,16 +9,16 @@ const main = async () => {
 
   console.log("\n\n 📡 Deploying...\n");
 
-  const africaToken = await deploy("AfricaToken") 
-  const governanceToken = await deploy("GovernanceToken") 
+  // const africaToken = await deploy("AfricaToken") 
+  // const governanceToken = await deploy("GovernanceToken") 
  
-  const adex =  await(deploy("ADEX",[africaToken.address,governanceToken.address]))
-  //await africaToken.transfer("0x0D97A542Da3F6D31EF5C5Ef4Ac7fFE08cC716A24",""+(10*10**18));
+  // const adex =  await(deploy("ADEX",[africaToken.address,governanceToken.address]))
+  // //await africaToken.transfer("0x0D97A542Da3F6D31EF5C5Ef4Ac7fFE08cC716A24",""+(10*10**18));
   
-  console.log("Approving ADEX ("+adex.address+") to take AfricaTokens from main account...")
-  await africaToken.approve(adex.address,ethers.utils.parseEther('100'))
-  console.log("Init DExchange with 5 tokens in liquidity ")
-  await adex.init(ethers.utils.parseEther('1'),{value:ethers.utils.parseEther('1')})
+  // console.log("Approving ADEX ("+adex.address+") to take AfricaTokens from main account...")
+  // await africaToken.approve(adex.address,ethers.utils.parseEther('100'))
+  // console.log("Init DExchange with 5 tokens in liquidity ")
+  // await adex.init(ethers.utils.parseEther('2'),{value:ethers.utils.parseEther('3')})
  
   // const deployerWallet = ethers.provider.getSigner()
   // console.log("Init Account with BNB")

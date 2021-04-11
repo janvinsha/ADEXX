@@ -5,7 +5,6 @@ const Curve = (props) => {
 
   useEffect(() => {
     let canvas = ref.current;
-
     const textSize = 16
 
     const width = canvas.width ;
@@ -18,8 +17,8 @@ const Curve = (props) => {
           
       const k = props.ethReserve * props.tokenReserve
 
-      console.log("CurveBNB ",props.ethReserve)
-      console.log("CorrectBNBBalance ",props.bnbFinal)
+      // console.log("CurveBNB ",props.ethReserve)
+      // console.log("CorrectBNBBalance ",props.bnbFinal)
 
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,width,height);
@@ -129,8 +128,8 @@ const Curve = (props) => {
       ctx.fill();
     }
     }
-  },[props]);
-
+  },[]);
+ 
 
   return (
     <div style={{margin:32,position:'relative',width:props.width,height:props.height}}>
@@ -140,10 +139,10 @@ const Curve = (props) => {
         {...props}
       />
       <div style={{position:'absolute',left:"20%",bottom:-20}}>
-        -- BNB Reserve -->
+        -- BNB Reserve --
       </div>
       <div style={{position:'absolute',left:-20,bottom:"20%",transform:"rotate(-90deg)",transformOrigin:"0 0"}}>
-        -- Token Reserve -->
+        -- Token Reserve --
       </div>
     </div>
   );

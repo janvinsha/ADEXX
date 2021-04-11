@@ -23,6 +23,7 @@ body{
     width:100%;
     overflow-x:hidden;
     background-image:${({isDark})=>isDark?"linear-gradient(#0f1529,#0b0f1d)":"linear-gradient(white ,#a7edf3,#6adbe6 )"};
+    background-size: cover;
     transition:all 0.6s ease-in-out;
     color:${({isDark})=>isDark?"whitesmoke":"gray"};
  

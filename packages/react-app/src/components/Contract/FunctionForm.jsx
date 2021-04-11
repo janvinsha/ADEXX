@@ -1,5 +1,8 @@
-
 import React, { useState } from "react";
+import {useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartArea, faPaperPlane, faThermometerThreeQuarters } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 import { BigNumber } from "@ethersproject/bignumber";
 import { hexlify } from "@ethersproject/bytes";
 import { Row, Col, Input, Divider, Tooltip, Button } from "antd";
@@ -10,6 +13,8 @@ const { utils } = require("ethers");
 
 
 export default function FunctionForm({ contractFunction, functionInfo, provider, gasPrice, triggerRefresh }) {
+  const isDarkMode=useSelector((state)=>state.isDark)
+
   const [form, setForm] = useState({});
   const [txValue, setTxValue] = useState();
   const [returnValue, setReturnValue] = useState();
@@ -98,7 +103,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
 
     return (
       <div style={{ margin: 2 }} key={key}>
-        <Input
+        <StyledInInput isDarkMode={isDarkMode}
           size="large"
           placeholder={input.name ? input.type + " " + input.name : input.type}
           autoComplete="off"
@@ -109,7 +114,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
             formUpdate[event.target.name] = event.target.value;
             setForm(formUpdate);
           }}
-          suffix={buttons}
+        suffix={buttons}
         />
       </div>
     )
@@ -117,7 +122,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
 
   const txValueInput = (
     <div style={{ margin: 2 }} key={"txValueInput"}>
-      <Input
+      <StyledInInput isDarkMode={isDarkMode}
         placeholder="transaction value"
         onChange={e => setTxValue(e.target.value)}
         value={txValue}
@@ -162,10 +167,14 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
     inputs.push(txValueInput);
   }
 
-  const buttonIcon = functionInfo.type === "call" ? <Button style={{ marginLeft: -32 }}>Read📡</Button> : <Button style={{ marginLeft: -32 }}>Send💸</Button>;
+  const buttonIcon = functionInfo.type === "call" ? 
+  <StyledButton isDarkMode={isDarkMode}>Read📡</StyledButton>
+   : <StyledButton isDarkMode={isDarkMode} >Send <FontAwesomeIcon 
+   icon={faPaperPlane}/></StyledButton>;
   inputs.push(
-    <div style={{ cursor: "pointer", margin: 2 }} key={"goButton"}>
-      <Input
+    <StyledInputInput  key={"goButton"}>
+      <div className="in">
+      <StyledDisInput isDarkMode={isDarkMode}
         onChange={e => setReturnValue(e.target.value)}
         defaultValue=""
         bordered={false}
@@ -173,7 +182,6 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
         value={returnValue}
         suffix={
           <div
-            style={{ width: 50, height: 30, margin: 0 }}
             type="default"
             onClick={async () => {
               let innerIndex = 0
@@ -216,30 +224,78 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
               triggerRefresh(true);
             }}
           >
-            {buttonIcon}
+         {buttonIcon}
           </div>
+           
         }
       />
-    </div>,
+        
+      </div>
+    </StyledInputInput>,
   );
 
   return (
-    <div>
-      <Row>
-        <Col
-          span={8}
-          style={{
-            textAlign: "right",
-            opacity: 0.333,
-            paddingRight: 6,
-            fontSize: 24,
-          }}
-        >
-          {functionInfo.name}
-        </Col>
-        <Col span={16}>{inputs}</Col>
-      </Row>
-      <Divider />
-    </div>
+    <StyledInputGroup isDarkMode={isDarkMode}>
+   
+      <span className="label">{functionInfo.name}</span>    
+      
+        {inputs}
+     </StyledInputGroup>
   );
 }
+
+const StyledDisInput=styled(Input)`
+  width:100%;
+  color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
+  border-radius:3px 0px 0px 3px;
+  outline:none;
+  &::placeholder{
+  color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
+font-size:0.9rem
+}
+&:disabled{
+    color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
+}
+`
+const StyledInInput=styled(Input)`
+  border:1px solid ${({isDarkMode})=>isDarkMode?"#222a3f":"#e8e9ec"};
+  width:100%;
+  background:${({isDarkMode})=>isDarkMode?"#020c1f":"white"};
+  border-radius:3px 0px 0px 3px;
+  outline:none;
+  color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
+  font-size:1rem;
+  &::placeholder{
+  color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
+font-size:0.9rem
+}
+`
+const StyledInputInput=styled.div`
+display:flex;
+flex-flow:column wrap;
+`
+const StyledButton=styled.button`
+  background:${({isDarkMode})=>isDarkMode?"#2c3961":"#f3f3f3"};
+    padding:0.2rem 0.5rem;
+    width:5rem;
+    color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+    &:hover{
+      color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+    }
+`
+const StyledInputGroup=styled.div`
+display:flex;
+flex-flow:column wrap;
+flex:25%;
+padding:0.4rem 0.1rem;
+
+@media screen and (max-width: 900px) {
+  flex:100%;
+  padding:0rem 1rem;
+  }
+.label{
+font-size:1.1rem;
+margin-left:auto;
+margin-right:auto;
+}
+`

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { formatEther } from "@ethersproject/units";
 import { useTokenBalance } from "eth-hooks";
+import styled from "styled-components";
 
 export default function TokenBalance(props) {
   const [dollarMode, setDollarMode] = useState(true);
@@ -29,18 +30,27 @@ export default function TokenBalance(props) {
   }
 
   return (
-    <span
+    <StyledTokenBalance
       style={{
         verticalAlign: "middle",
-        fontSize: 24,
-        padding: 8,
-        cursor: "pointer",
       }}
       onClick={() => {
         setDollarMode(!dollarMode);
       }}
     >
-      {props.img} {displayBalance}
-    </span>
+      <img src={props.img} alt=""/>{displayBalance}
+    </StyledTokenBalance>
   );
 }
+
+const StyledTokenBalance=styled.span`
+display:flex;
+img{
+  width:1.6rem;
+  height:1.6rem;
+  @media screen and (max-width: 900px) {
+    width:1.8rem;
+  height:1.8rem;
+    }
+}
+`
