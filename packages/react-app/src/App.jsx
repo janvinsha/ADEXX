@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {Switch, Route, Link } from "react-router-dom";
+import {Switch, Route, Link,useLocation } from "react-router-dom";
 import "antd/dist/antd.css";
 import {  JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import { Row, Col, Button, Alert, Switch as SwitchD } from "antd";
@@ -12,12 +12,16 @@ import Header from "./components/Header";
 import GlobalStyles from "./components/GlobalStyles";
 import Home from "./views/Home";
 import Staking from "./views/Staking"
+import Savings from "./views/Savings"
 import { Transactor } from "./helpers";
 import { formatEther, parseEther } from "@ethersproject/units";
 //import Hints from "./Hints";
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 import ADEX from "./ADEX";
 import Contract from "./components/Contract/Contract";
+
+import { AnimatePresence } from "framer-motion";
+
 ////
 
 /// 📡 What chain are your contracts deployed to?
@@ -46,6 +50,7 @@ const blockExplorer = targetNetwork.blockExplorer;
 
 const App=(props)=> {
   const isDarkMode=useSelector((state)=>state.isDark)
+  const location = useLocation();
   const mainnetProvider = (mainnet && mainnet._network) ? mainnet : mainnetInfura
   if(DEBUG) console.log("🌎 mainnetProvider",mainnetProvider)
 
@@ -182,8 +187,8 @@ isDark={isDark}
            gasPrice={gasPrice}
            faucetAvailable={faucetAvailable}
            />
-    
-        <Switch>
+      <AnimatePresence exitBeforeEnter>
+      <Switch location={location} key={location.pathname}>
           <Route exact path="/">
              <Home
             selectedProvider={userProvider}
@@ -243,8 +248,12 @@ isDark={isDark}
             readContracts={readContracts}
           />
           </Route>
+          <Route  exact path="/savings">
+          <Savings
+          />
+          </Route>
         </Switch>
-
+</AnimatePresence>
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options
       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
         

@@ -14,9 +14,10 @@ import { BigNumber } from "@ethersproject/bignumber";
 import  Address from "./components/Address"
 import  TokenBalance from "./components/TokenBalance"
 import adexIcon from "./adex.ico"
+import { motion} from "framer-motion";
 
 import { util } from 'ethers';
-import Curve from './Curve.js'
+import Curve from './Curve'
 const { Meta } = Card;
 const { utils } = require("ethers");
 
@@ -189,6 +190,7 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
     chartVisible?setChartVisible(false):setChartVisible(true)
   }
  
+
     return (
       <StyledAdex isDarkMode={isDarkMode} chartVisible={chartVisible}>    
       <div className="main">

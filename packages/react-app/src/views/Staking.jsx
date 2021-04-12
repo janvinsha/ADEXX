@@ -1,6 +1,8 @@
 import React from 'react';
 import Contract from "../components/Contract/Contract";
 import ADEX from "../ADEX";
+import { pageAnimation } from "../animations";
+import { motion} from "framer-motion";
 
 const Staking = ({ 
     address,
@@ -16,7 +18,7 @@ const Staking = ({
     setPurposeEvents,
   
 }) => {
-    return (<div className="staking">
+    return (<motion.div className="staking" variants={pageAnimation} initial="hidden" animate="show" exit="exit" >
 <ADEX
         address={address}
         userProvider={userProvider}
@@ -31,7 +33,7 @@ const Staking = ({
         setPurposeEvents={setPurposeEvents}
       />            
  
-    </div> );
+    </motion.div> );
 }
  
 export default Staking;

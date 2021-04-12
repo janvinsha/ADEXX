@@ -128,8 +128,16 @@ const Curve = (props) => {
       ctx.fill();
     }
     }
-  },[]);
+  },[   props.addingEth,
+    props.addingToken,
+    props.tokenReserve, ]);
  
+  console.log(
+    props.addingEth,
+    props.addingToken,
+    props.ethReserve,
+    props.tokenReserve,
+  );
 
   return (
     <StyledCurve style={{margin:32,position:'relative',width:props.width,height:props.height}}>
@@ -149,19 +157,7 @@ const Curve = (props) => {
 };
 
 const StyledCurve=styled.div`
-.y{
-font-size:0.8rem;
-@media screen and (max-width: 900px) {
-  font-size:1rem;
-  }
-}
-.x{
 
-  font-size:0.7rem;
-  @media screen and (max-width: 900px) {
-    font-size:8rem;
-  }
-}
 `
 
 

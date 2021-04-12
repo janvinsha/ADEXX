@@ -8,6 +8,8 @@ import DisplayVariable from "./DisplayVariable";
 import FunctionForm from "./FunctionForm";
 import  TokenBalance from "../../components/TokenBalance"
 import adexIcon from "../../adex.ico"
+import { pageAnimation } from "../../animations";
+import { motion} from "framer-motion";
 
 const noContractDisplay = (
   <div style={{marginLeft:"auto",marginRight:"auto",padding:"1rem 2rem"}}>
@@ -77,7 +79,7 @@ const Contract=({ customContract, account, gasPrice, signer, provider, name, sho
     const contractName = "ADEX";
 const tokenName = "AfricaToken";
   return (
-    <StyledContract isDarkMode={isDarkMode} >
+    <StyledContract isDarkMode={isDarkMode}  variants={pageAnimation} initial="hidden" animate="show" exit="exit">
         <div
     className="contract"
         // loading={contractDisplay && contractDisplay.length <= 0}
@@ -143,7 +145,7 @@ const StyledDisplay=styled.div`
 }
 `
 
-const StyledContract=styled.div`
+const StyledContract=styled(motion.div)`
 padding:1rem;
 
 @media screen and (max-width: 900px) {

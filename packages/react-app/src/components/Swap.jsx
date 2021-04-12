@@ -14,6 +14,7 @@ import { abi as IBSCswapRouter02ABI } from '@bscswap/contracts/build/IBSCswapRou
 import { useDebounce } from "../hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch, faCog,faExchangeAlt, faRetweet, faSpinner, } from "@fortawesome/free-solid-svg-icons";
+import { motion} from "framer-motion";
 
 const { Option } = Select;
 const { Text } = Typography;

@@ -20,7 +20,7 @@ import Ramp from "../components/Ramp";
 import GasGauge from "../components/GasGauge";
 import Faucet from "../components/Faucet";
 import {NETWORK,NETWORKS } from "../constants";
-
+import Loader from "./Loader"
 const Header = ({
   address,
   userProvider,
@@ -43,9 +43,16 @@ const Header = ({
   const pathname=location.pathname
   const [more,setMore]=useState(false)
   const [menu,setMenu]=useState(false)
+  const [themeLoading,setThemeloading]=useState(false)
   const isDarkMode=useSelector((state)=>state.isDark)
   const handlerThemeSwitch=()=>{
-    dispatch(changeTheme())
+setThemeloading(true)
+
+    setTimeout(() => {
+      setThemeloading(false)
+      dispatch(changeTheme())
+    }, 1300)
+   
   }
   let container = React.createRef();
   document.onclick=(e)=>{
@@ -79,6 +86,7 @@ setMore(false)
   }
   return (
     <StyledNav isDarkMode={isDarkMode} more={more}>
+       { themeLoading&& <Loader/>}
           <div className="navbar">
             <div className="left">
             <span className="icon">
@@ -87,7 +95,7 @@ setMore(false)
         <Link  to="/" className={pathname==="/"?"active":""}>Swap</Link>
         <Link to="/staking" className={pathname==="/staking"?"active":""}>Staking</Link>
         <Link to="/contract" className={pathname==="/contract"?"active":""}>Contract</Link>
-        <Link to="/xend" className={pathname==="/xend"?"active":""}>Xend</Link>
+        <Link to="/savings" className={pathname==="/savings"?"active":""}>Savings</Link>
             </div>
      
   <div className="right">
@@ -151,7 +159,7 @@ setMore(false)
         <Link  to="/" className={pathname==="/"?"active":""}>Swap</Link>
         <Link to="/staking" className={pathname==="/staking"?"active":""}>Staking</Link>
         <Link to="/contract" className={pathname==="/contract"?"active":""}>Contract</Link>
-        <Link to="/xend" className={pathname==="/xend"?"active":""}>Xend</Link>
+        <Link to="/savings" className={pathname==="/savings"?"active":""}>Savings</Link>
             </div>
      
   <div className="right">
@@ -222,7 +230,6 @@ const StyledNav=styled.div`
  transition:all 0.6s ease-in-out;
 
  border-bottom:1px solid ${({isDarkMode})=>isDarkMode?"#222a3f":"#e8e9ec"};
-
 .navbar{
   display:flex;
   flex-flow: row wrap;
@@ -425,8 +432,8 @@ display:none;
       display:flex;
       flex-flow: row wrap;
       align-items: center;
-      padding:1.3rem 0.8rem;
-
+      padding:1.2rem 0.8rem;
+      
       a{
         font-size:1.4rem;
         font-weight:500;
@@ -443,12 +450,7 @@ display:none;
       }
     }
     .right{
-      margin-left:auto;
-      padding:1.1rem 0.8rem;
-      display:flex;
-      flex-flow:row wrap;
-      align-items: center;
-
+  
  }}
  
 `;
