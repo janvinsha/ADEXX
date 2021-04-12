@@ -145,6 +145,7 @@ const StyledDisplay=styled.div`
 
 const StyledContract=styled.div`
 padding:1rem;
+
 @media screen and (max-width: 900px) {
   padding-bottom:6rem
   }

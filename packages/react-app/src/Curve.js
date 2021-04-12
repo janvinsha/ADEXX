@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-
+import styled from "styled-components";
 const Curve = (props) => {
   let ref = useRef();
 
@@ -132,21 +132,38 @@ const Curve = (props) => {
  
 
   return (
-    <div style={{margin:32,position:'relative',width:props.width,height:props.height}}>
+    <StyledCurve style={{margin:32,position:'relative',width:props.width,height:props.height}}>
       <canvas
         style={{position:'absolute',left:0,top:0}}
         ref={ref}
         {...props}
       />
-      <div style={{position:'absolute',left:"20%",bottom:-20}}>
+      <div style={{position:'absolute',left:"20%",bottom:-20}} className="y">
         -- BNB Reserve --
       </div>
-      <div style={{position:'absolute',left:-20,bottom:"20%",transform:"rotate(-90deg)",transformOrigin:"0 0"}}>
+      <div className="x" style={{position:'absolute',left:-20,bottom:"20%",transform:"rotate(-90deg)",transformOrigin:"0 0"}}>
         -- Token Reserve --
       </div>
-    </div>
+    </StyledCurve>
   );
 };
+
+const StyledCurve=styled.div`
+.y{
+font-size:0.8rem;
+@media screen and (max-width: 900px) {
+  font-size:1rem;
+  }
+}
+.x{
+
+  font-size:0.7rem;
+  @media screen and (max-width: 900px) {
+    font-size:8rem;
+  }
+}
+`
+
 
 export default Curve;
 

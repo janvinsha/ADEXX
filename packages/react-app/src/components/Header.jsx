@@ -234,13 +234,13 @@ const StyledNav=styled.div`
       flex-flow: row wrap;
       align-items: center;
       a{
-        font-size:1rem;
+        font-size:1.1rem;
         font-weight:500;
         padding:0rem 1rem
       }
       .active{
-        color:${({isDarkMode})=>isDarkMode?"white":"black"};
-     
+        color:${({isDarkMode})=>isDarkMode?"#d4d3d3":"black"};
+       
       }
       .icon{
         img{
@@ -432,9 +432,9 @@ display:none;
         font-weight:500;
         padding:0rem 1rem
       }
-      .active{
-        color:${({isDarkMode})=>isDarkMode?"white":"black"};
      
+        .active{
+        color:${({isDarkMode})=>isDarkMode?"#d4d3d3":"black"};
       }
       .icon{
         img{

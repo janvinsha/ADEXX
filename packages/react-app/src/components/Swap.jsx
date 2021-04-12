@@ -434,7 +434,7 @@ const handleReverse=()=>{
          let slippagePercent = new Percent(Math.round(e.target.value*100).toString(), "10000")
          setSlippageTolerance(slippagePercent)
        }}
-      /></span>
+      />%</span>
       <span >amountInMax:{amountInMax?amountInMax.toExact():null}</span>
       <span >amountOutMin: {amountOutMin?amountOutMin.toExact():null}</span>
       <span >timeLimitInSeconds: <input type="number"
@@ -522,7 +522,7 @@ const handleReverse=()=>{
         setExact('out')
       }}/>
        
-       <StyledSelect isDarkMode={isDarkMode} type="primary"
+       <StyledSelect isDarkMode={isDarkMode} 
          dropdownStyle={{ background:isDarkMode?"#2c3961":"#f3f3f3",color:isDarkMode?"whitesmoke":"gray",}}
         onChange={(value) => {
         console.log(value, tokenIn, tokenOut)
@@ -540,7 +540,6 @@ const handleReverse=()=>{
       }} 
       defaultValue={defaultTokenOut}
       placeholder="Select"
-      
       showSearch
   >
      {tokenList.map(token => (
@@ -587,6 +586,13 @@ const handleReverse=()=>{
 const StyledSelect=styled(Select)`
  margin:0;
  width:6.5rem;
+
+ .ant-select-selection.ant-select-selection--single
+> div > div > div > div + div {
+   margin-top: -5px;
+   padding: 4px 5px 5px 14px !important;
+   background-color:blue !important;
+}
  @media screen and (max-width: 900px) {
       width:8rem;
       margin:0;

@@ -207,7 +207,7 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
           addingToken={values && values["tokenToBNB"]?values["tokenToBNB"]:null}
           ethReserve={contractBalanceFloat}
           tokenReserve={tokenBalanceFloat}
-          width={500} height={500}
+          width={350} height={350}
         />
          </div>    
         </div>
@@ -217,7 +217,7 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
              
               <span className="subTitle">
               
-              ⚖️{parseFloat((contractBalanceFloat)).toFixed(4)}
+              <img src="https://tokens.bscswap.com/images/0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd.png" alt=""/> {parseFloat((contractBalanceFloat)).toFixed(4)}
               
                 <TokenBalance name={tokenName} img={adexIcon} address={contractAddress} contracts={readContracts} />
   
@@ -327,6 +327,14 @@ margin-right:auto;
   .subTitle{
     display:flex;
   align-items: center;
+  img{
+  width:1.6rem;
+  height:1.6rem;
+  @media screen and (max-width: 900px) {
+    width:1.8rem;
+  height:1.8rem;
+    }
+}
   }
 }
 `
@@ -335,6 +343,7 @@ margin-right:auto;
 
   const StyledAdex=styled.div`
   padding:1rem ;
+ 
   .main{
   
     .chart{

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartArea, faPaperPlane, faThermometerThreeQuarters } from "@fortawesome/free-solid-svg-icons";
+import { faCalculator, faChartArea, faPaperPlane, faThermometerThreeQuarters, faUpload } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { BigNumber } from "@ethersproject/bignumber";
 import { hexlify } from "@ethersproject/bytes";
@@ -83,7 +83,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
               setForm(formUpdate);
             }}
           >
-            ✴️
+            <FontAwesomeIcon icon={faCalculator}/>
             </div>
         </Tooltip>
       )
@@ -249,13 +249,17 @@ const StyledDisInput=styled(Input)`
   color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
   border-radius:3px 0px 0px 3px;
   outline:none;
+input{
+  &:disabled{
+    background:${({isDarkMode})=>isDarkMode?"#020c1f":"white"};
+  color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
   &::placeholder{
   color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
 font-size:0.9rem
-}
-&:disabled{
-    color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
-}
+}}
+  }
+
+
 `
 const StyledInInput=styled(Input)`
   border:1px solid ${({isDarkMode})=>isDarkMode?"#222a3f":"#e8e9ec"};
@@ -264,11 +268,15 @@ const StyledInInput=styled(Input)`
   border-radius:3px 0px 0px 3px;
   outline:none;
   color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
-  font-size:1rem;
-  &::placeholder{
+ input{
+  background:${({isDarkMode})=>isDarkMode?"#020c1f":"white"};
   color:${({isDarkMode})=>isDarkMode?"#e0e0e0":"#7e7a7a"};
-font-size:0.9rem
+  &::placeholder{
+
 }
+font-size:1rem;
+}
+
 `
 const StyledInputInput=styled.div`
 display:flex;
