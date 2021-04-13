@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 const Curve = (props) => {
   let ref = useRef();
-
+  const isDarkMode=useSelector((state)=>state.isDark)
   useEffect(() => {
     let canvas = ref.current;
     const textSize = 16
@@ -42,8 +43,8 @@ const Curve = (props) => {
       const plotY = (y)=>{
         return height - (y - minY) / (maxY - minY) * height ;
       }
-      ctx.strokeStyle = "#000000";
-      ctx.fillStyle = "#000000";
+      ctx.strokeStyle = isDarkMode?"whitesmoke":"gray"
+      ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
       ctx.font = textSize+"px Arial";
       // +Y axis
       ctx.beginPath() ;
@@ -78,7 +79,7 @@ const Curve = (props) => {
 
         let newEthReserve = props.ethReserve + parseFloat(props.addingEth)
 
-        ctx.fillStyle = "#bbbbbb";
+        ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
         ctx.beginPath();
         ctx.arc(plotX(newEthReserve),plotY(k/(newEthReserve)), 5, 0, 2 * Math.PI);
         ctx.fill();
@@ -86,21 +87,21 @@ const Curve = (props) => {
         ctx.strokeStyle = "#009900";
         drawArrow(ctx,plotX(props.ethReserve),plotY(props.tokenReserve),plotX(newEthReserve),plotY(props.tokenReserve))
 
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
         ctx.fillText(""+props.addingEth+" BNB input", plotX(props.ethReserve)+textSize, plotY(props.tokenReserve)-textSize);
 
         ctx.strokeStyle = "#990000";
         drawArrow(ctx,plotX(newEthReserve),plotY(props.tokenReserve),plotX(newEthReserve),plotY(k/(newEthReserve)))
 
         let amountGained =  Math.round(10000 * ( props.addingEth * props.tokenReserve ) / ( newEthReserve ) ) /10000
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
         ctx.fillText(""+(amountGained)+" 🌍 output (-0.3% fee)", plotX(newEthReserve)+textSize,plotY(k/(newEthReserve)));
 
       }else if(props.addingToken){
 
         let newTokenReserve = props.tokenReserve + parseFloat(props.addingToken)
 
-        ctx.fillStyle = "#bbbbbb";
+        ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
         ctx.beginPath();
         ctx.arc(plotX(k/(newTokenReserve)),plotY(newTokenReserve), 5, 0, 2 * Math.PI);
         ctx.fill();
@@ -109,7 +110,7 @@ const Curve = (props) => {
         ctx.strokeStyle = "#990000";
         drawArrow(ctx,plotX(props.ethReserve),plotY(props.tokenReserve),plotX(props.ethReserve),plotY(newTokenReserve))
 
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = isDarkMode?"whitesmoke":"gray"
         ctx.fillText(""+(props.addingToken)+" 🌍 input", plotX(props.ethReserve)+textSize,plotY(props.tokenReserve));
 
         ctx.strokeStyle = "#009900";
@@ -117,7 +118,7 @@ const Curve = (props) => {
 
         let amountGained =  Math.round(10000 * ( props.addingToken * props.ethReserve ) / ( newTokenReserve ) ) /10000
         //console.log("amountGained",amountGained)
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle =isDarkMode?"whitesmoke":"gray"
         ctx.fillText(""+amountGained+" BNB output (-0.3% fee)", plotX(k/(newTokenReserve))+textSize,plotY(newTokenReserve)-textSize);
 
       }
@@ -130,7 +131,7 @@ const Curve = (props) => {
     }
   },[   props.addingEth,
     props.addingToken,
-    props.tokenReserve, ]);
+    props.tokenReserve,  ]);
  
   console.log(
     props.addingEth,
@@ -140,7 +141,7 @@ const Curve = (props) => {
   );
 
   return (
-    <StyledCurve style={{margin:32,position:'relative',width:props.width,height:props.height}}>
+    <StyledCurve style={{margin:32,position:'relative',width:props.width,height:props.height}} isDarkMode={isDarkMode}>
       <canvas
         style={{position:'absolute',left:0,top:0}}
         ref={ref}
@@ -157,7 +158,10 @@ const Curve = (props) => {
 };
 
 const StyledCurve=styled.div`
-
+color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+canvas{
+  color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+}
 `
 
 

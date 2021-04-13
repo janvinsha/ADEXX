@@ -145,7 +145,9 @@ setMore(false)
       {faucetAvailable &&<span>
                  <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider}/></span>   
                 }
+                 <span><a href="https://kayalbertus.gitbook.io/adex-guide/">Guide</a></span> 
        <span><Link to="/support">Support</Link></span> 
+      
       </div>
   </span>
   </div>
@@ -214,7 +216,9 @@ setMore(false)
       {faucetAvailable &&<span>
                  <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider}/></span>   
                 }
+                 <span><a href="https://kayalbertus.gitbook.io/adex-guide/">Guide</a></span> 
        <span><Link to="/support">Support</Link></span> 
+      
       </div>
   </span>
 

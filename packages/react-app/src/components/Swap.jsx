@@ -488,7 +488,6 @@ const handleReverse=()=>{
         setExact('out')
         setBalanceIn()
       }} 
-      
       showSearch
       >
       {tokenList.map(token => (
@@ -500,7 +499,7 @@ const handleReverse=()=>{
    </div>
 
  </div>
-  
+
  <span className="reverse">
    <button onclick={handleReverse}> 
    <FontAwesomeIcon rotation={90} icon={faExchangeAlt} color={isDarkMode?"whitesmoke":"gray"}/>
@@ -575,7 +574,7 @@ const handleReverse=()=>{
       </button>}
       {swapModal}
     </div>
-  
+
     </StyledMainSwap>
     </div>
     </StyledSwap>
@@ -588,12 +587,6 @@ const StyledSelect=styled(Select)`
  margin:0;
  width:6.5rem;
 
- .ant-select-selection.ant-select-selection--single
-> div > div > div > div + div {
-   margin-top: -5px;
-   padding: 4px 5px 5px 14px !important;
-   background-color:blue !important;
-}
  @media screen and (max-width: 900px) {
       width:8rem;
       margin:0;

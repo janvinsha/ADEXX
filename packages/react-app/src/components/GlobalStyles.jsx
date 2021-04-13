@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const GlobalStyles =createGlobalStyle`
+
 *{
     margin:0;
     padding:0;

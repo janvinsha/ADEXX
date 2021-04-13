@@ -283,12 +283,12 @@ display:flex;
 flex-flow:column wrap;
 `
 const StyledButton=styled.button`
-  background:${({isDarkMode})=>isDarkMode?"#2c3961":"#f3f3f3"};
+  background:${({isDarkMode})=>isDarkMode?"#2c3961":"rgba(0,180,197,1)"};
     padding:0.2rem 0.5rem;
     width:5rem;
-    color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+    color:${({isDarkMode})=>isDarkMode?"whitesmoke":"whitesmoke"};
     &:hover{
-      color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+      color:${({isDarkMode})=>isDarkMode?"whitesmoke":"whitesmoke"};
     }
 `
 const StyledInputGroup=styled.div`

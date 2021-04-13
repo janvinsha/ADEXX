@@ -3,11 +3,14 @@ import React from "react";
 import styled from "styled-components";
 import { motion} from "framer-motion";
 import { loader } from "../animations";
+import adexIcon from "../adex.ico"
 
 const Loader = () => {
   return(
   <StyledContainer>
-   <StyledLoader variants={loader} animate="animateOne"/>
+   <StyledLoader variants={loader} animate="animateOne">
+     <img src={adexIcon} alt=""/>
+   </StyledLoader>
    </StyledContainer>
   )
 };
@@ -26,15 +29,15 @@ background: rgba(0, 0, 0, 0.2);
 
 `
 const StyledLoader = styled(motion.div)`
-  width: 10px;
-  height: 10px;
-  margin: 40px auto;
-  border-radius: 50%;
-  background-color: white;
+img{
+  width:6.5rem;
+
   @media screen and (max-width: 900px) {
-    width: 15px;
-  height: 15px;
+    width:6rem;
+
   }
+}
+ 
 `;
 
 export default Loader;

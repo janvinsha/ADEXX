@@ -250,6 +250,14 @@ isDark={isDark}
           </Route>
           <Route  exact path="/savings">
           <Savings
+             
+                address={address}
+                userProvider={userProvider}
+
+                tx={tx}
+                writeContracts={writeContracts}
+                readContracts={readContracts}
+              
           />
           </Route>
         </Switch>

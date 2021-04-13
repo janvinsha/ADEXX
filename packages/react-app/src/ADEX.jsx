@@ -14,6 +14,7 @@ import { BigNumber } from "@ethersproject/bignumber";
 import  Address from "./components/Address"
 import  TokenBalance from "./components/TokenBalance"
 import adexIcon from "./adex.ico"
+import redDia from "./redDia.png"
 import { motion} from "framer-motion";
 
 import { util } from 'ethers';
@@ -33,10 +34,10 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
     console.log('ReadContracts',readContracts);
     const contractAddress = readContracts?readContracts.ADEX.address:""
     const tokenAddress = readContracts?readContracts.AfricaToken.address:""
-    const contractBalanceHex = useBalance(userProvider,contractAddress)
-    
+    // const contractBalanceHex = useBalance(userProvider,contractAddress)
+    const contractBalanceHex= useContractReader(writeContracts,"ADEX","balanceOf",[address])
+  
  
-
     let contractBalanceFloat = 0;
     if (typeof contractBalanceHex === 'undefined'){
     const invalidContractBalance = 'true';
@@ -72,30 +73,48 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
     const [ form, setForm ] = useState({})
     const [ values, setValues ] = useState({})
     const [chartVisible, setChartVisible] = useState(false)
-  
+    
     const rowForm = (title,icon,onClick)=>{
       return (
         <StyledInputGroup isDarkMode={isDarkMode}>
           <span className="label">{title}</span>    
             <span className="inputgrp"> 
               <input
-                onChange={(e)=>{
-                  let newValues = {...values}
-                  newValues[title] = e.target.value
-                  setValues(newValues)
-                }}
-                value={values[title]}
+             onChange={(e)=>{
+              let newValues = {...values}
+              newValues[title] = e.target.value
+              setValues(newValues)
+            }}
+            value={values[title]}
               />
-                      <button type="default" onClick={()=>{
+              <button onClick={()=>{
                     onClick(values[title])
                     let newValues = {...values}
                     newValues[title] = ""
                     setValues(newValues)
-                  }}><FontAwesomeIcon 
-                  icon={title="BNBToToken"?faPaperPlane:title="TokenToBNB"?faPaperPlane:title="Deposit"?faPaperPlane:title="Withdraw"?faPaperPlane:faPaperPlane}/>
-                   </button>
+                  }}>
+  <FontAwesomeIcon icon={faPaperPlane}/>
+                </button>
             </span>
         </StyledInputGroup>
+      
+              // <Input
+              //   onChange={(e)=>{
+              //     let newValues = {...values}
+              //     newValues[title] = e.target.value
+              //     setValues(newValues)
+              //   }}
+              //   value={values[title]}
+              //   addonAfter={
+              //     <div type="default" onClick={()=>{
+              //       onClick(values[title])
+              //       let newValues = {...values}
+              //       newValues[title] = ""
+              //       setValues(newValues)
+              //     }}>{icon}</div>
+              //   }
+              // />
+          
       )
     }
   
@@ -114,7 +133,7 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
             console.log("swapEthToTokenResult:",swapEthToTokenResult)
           })}
   
-          {rowForm("TokenToBNB","🔏",async (value)=>{
+          {rowForm("tokenToBNB","🔏",async (value)=>{
             let valueInEther = utils.parseEther(""+value)
             console.log("valueInEther",valueInEther)
             let allowance =  await readContracts.AfricaToken.allowance(address,readContracts.ADEX.address)
@@ -198,6 +217,7 @@ const ADEX=({purpose, setPurposeEvents, address, mainnetProvider, userProvider,
        <span className="icon">
          <span className="balance">
            Token Balance:<TokenBalance name={tokenName} img={adexIcon} address={address} contracts={readContracts} />
+           <img src={redDia}/>0.0000
          </span>
        <button type="text" onClick={handlerChartVisible}>
           <FontAwesomeIcon icon={faChartArea} color={isDarkMode?"whitesmoke":"gray"}/>
@@ -264,9 +284,9 @@ input{
 button{
 border-radius:0px 3px 3px 0px;
 padding:0.6rem;
-background:${({isDarkMode})=>isDarkMode?"#2c3961":"#f3f3f3"};
+background:${({isDarkMode})=>isDarkMode?"#2c3961":"rgba(0,180,197,1)"};
 width:4rem;
-color:${({isDarkMode})=>isDarkMode?"whitesmoke":"gray"};
+color:${({isDarkMode})=>isDarkMode?"whitesmoke":"whitesmoke"};
 @media screen and (max-width: 900px) {
    
 }
@@ -367,9 +387,14 @@ margin-right:auto;
   padding:0rem 0.5rem;
   .balance{
     display:flex;
-    @media screen and (max-width: 900px) {
-    
+    img{
+  width:1.6rem;
+  height:1.6rem;
+  @media screen and (max-width: 900px) {
+    width:1.8rem;
+  height:1.8rem;
     }
+}
   }
   @media screen and (max-width: 900px) {
     padding:0rem 0.7rem;
